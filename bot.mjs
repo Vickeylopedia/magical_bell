@@ -20,7 +20,16 @@ import puppeteer from 'puppeteer';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import http from 'http';
 
+// Tell Render your app is healthy on the assigned PORT
+const PORT = process.env.PORT || 10000;
+http.createServer((req, res) => {
+  res.writeHead(200, { 'Content-Type': 'text/plain' });
+  res.end('Audius Bot is active!\n');
+}).listen(PORT, '0.0.0.0', () => {
+  console.log(`[HTTP] Keep-alive server listening on port ${PORT}`);
+});
 // ─── Resolve __dirname in ESM ──────────────────────────────────────────────
 const __filename = fileURLToPath(import.meta.url);
 const __dirname  = path.dirname(__filename);
