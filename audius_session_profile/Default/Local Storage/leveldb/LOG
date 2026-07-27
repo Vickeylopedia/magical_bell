@@ -1,0 +1,128 @@
+2026/07/27-22:37:27.060 2100 Reusing MANIFEST C:\Users\dell\Documents\antigravity\audius\audius_session_profile\Default\Local Storage\leveldb/MANIFEST-000001
+2026/07/27-22:37:27.097 2100 Recovering log #558
+2026/07/27-22:37:27.101 2100 Level-0 table #561: started
+2026/07/27-22:37:27.126 2100 Level-0 table #561: 19550 bytes OK
+2026/07/27-22:37:27.161 2100 Delete type=0 #558
+2026/07/27-22:39:29.131 35ac Level-0 table #564: started
+2026/07/27-22:39:29.152 35ac Level-0 table #564: 18979 bytes OK
+2026/07/27-22:39:29.161 35ac Delete type=0 #562
+2026/07/27-22:39:29.166 35ac Compacting 4@0 + 1@1 files
+2026/07/27-22:39:29.195 35ac Generated table #565@0: 13 keys, 19709 bytes
+2026/07/27-22:39:29.196 35ac Compacted 4@0 + 1@1 files => 19709 bytes
+2026/07/27-22:39:29.198 35ac compacted to: files[ 0 1 1 0 0 0 0 ]
+2026/07/27-22:39:29.200 35ac Delete type=2 #555
+2026/07/27-22:39:29.201 35ac Delete type=2 #557
+2026/07/27-22:39:29.201 35ac Delete type=2 #559
+2026/07/27-22:39:29.201 35ac Delete type=2 #561
+2026/07/27-22:39:29.201 35ac Delete type=2 #564
+2026/07/27-22:40:29.102 35ac Level-0 table #567: started
+2026/07/27-22:40:29.122 35ac Level-0 table #567: 18933 bytes OK
+2026/07/27-22:40:29.131 35ac Delete type=0 #563
+2026/07/27-22:41:29.477 35ac Level-0 table #569: started
+2026/07/27-22:41:29.911 35ac Level-0 table #569: 19414 bytes OK
+2026/07/27-22:41:30.263 35ac Delete type=0 #566
+2026/07/27-22:42:29.135 35ac Level-0 table #571: started
+2026/07/27-22:42:29.220 35ac Level-0 table #571: 18835 bytes OK
+2026/07/27-22:42:29.233 35ac Delete type=0 #568
+2026/07/27-22:43:29.345 35ac Level-0 table #573: started
+2026/07/27-22:43:29.470 35ac Level-0 table #573: 20246 bytes OK
+2026/07/27-22:43:29.796 35ac Delete type=0 #570
+2026/07/27-22:43:29.800 35ac Compacting 4@0 + 1@1 files
+2026/07/27-22:43:30.604 35ac Generated table #574@0: 13 keys, 21032 bytes
+2026/07/27-22:43:30.604 35ac Compacted 4@0 + 1@1 files => 21032 bytes
+2026/07/27-22:43:30.955 35ac compacted to: files[ 0 1 1 0 0 0 0 ]
+2026/07/27-22:43:30.967 35ac Delete type=2 #565
+2026/07/27-22:43:30.967 35ac Delete type=2 #567
+2026/07/27-22:43:31.071 35ac Delete type=2 #569
+2026/07/27-22:43:31.071 35ac Delete type=2 #571
+2026/07/27-22:43:31.071 35ac Delete type=2 #573
+2026/07/27-22:44:31.007 35ac Level-0 table #576: started
+2026/07/27-22:44:33.992 35ac Level-0 table #576: 19481 bytes OK
+2026/07/27-22:44:34.517 35ac Delete type=0 #572
+2026/07/27-22:46:30.308 35ac Level-0 table #578: started
+2026/07/27-22:46:30.643 35ac Level-0 table #578: 18956 bytes OK
+2026/07/27-22:46:30.739 35ac Delete type=0 #575
+2026/07/27-22:48:34.411 2100 Level-0 table #580: started
+2026/07/27-22:48:35.021 2100 Level-0 table #580: 27534 bytes OK
+2026/07/27-22:48:35.452 2100 Delete type=0 #577
+2026/07/27-22:50:29.203 35ac Level-0 table #582: started
+2026/07/27-22:50:29.303 35ac Level-0 table #582: 18971 bytes OK
+2026/07/27-22:50:29.315 35ac Delete type=0 #579
+2026/07/27-22:50:29.348 35ac Compacting 4@0 + 1@1 files
+2026/07/27-22:50:29.413 35ac Generated table #583@0: 13 keys, 19730 bytes
+2026/07/27-22:50:29.414 35ac Compacted 4@0 + 1@1 files => 19730 bytes
+2026/07/27-22:50:29.423 35ac compacted to: files[ 0 1 1 0 0 0 0 ]
+2026/07/27-22:50:29.447 35ac Delete type=2 #574
+2026/07/27-22:50:29.447 35ac Delete type=2 #576
+2026/07/27-22:50:29.448 35ac Delete type=2 #578
+2026/07/27-22:50:29.448 35ac Delete type=2 #580
+2026/07/27-22:50:29.448 35ac Delete type=2 #582
+2026/07/27-22:51:29.470 35ac Level-0 table #585: started
+2026/07/27-22:51:29.551 35ac Level-0 table #585: 18895 bytes OK
+2026/07/27-22:51:29.606 35ac Delete type=0 #581
+2026/07/27-22:52:29.124 35ac Level-0 table #587: started
+2026/07/27-22:52:29.207 35ac Level-0 table #587: 18934 bytes OK
+2026/07/27-22:52:30.123 35ac Delete type=0 #584
+2026/07/27-22:53:29.133 35ac Level-0 table #589: started
+2026/07/27-22:53:29.168 35ac Level-0 table #589: 18924 bytes OK
+2026/07/27-22:53:29.192 35ac Delete type=0 #586
+2026/07/27-22:54:29.332 35ac Level-0 table #591: started
+2026/07/27-22:54:29.613 35ac Level-0 table #591: 18932 bytes OK
+2026/07/27-22:54:29.643 35ac Delete type=0 #588
+2026/07/27-22:54:29.648 35ac Compacting 4@0 + 1@1 files
+2026/07/27-22:54:30.610 35ac Generated table #592@0: 13 keys, 19732 bytes
+2026/07/27-22:54:30.611 35ac Compacted 4@0 + 1@1 files => 19732 bytes
+2026/07/27-22:54:30.614 35ac compacted to: files[ 0 1 1 0 0 0 0 ]
+2026/07/27-22:54:30.739 35ac Delete type=2 #583
+2026/07/27-22:54:30.744 35ac Delete type=2 #585
+2026/07/27-22:54:30.763 35ac Delete type=2 #587
+2026/07/27-22:54:30.764 35ac Delete type=2 #589
+2026/07/27-22:54:30.764 35ac Delete type=2 #591
+2026/07/27-22:55:29.106 35ac Level-0 table #594: started
+2026/07/27-22:55:29.123 35ac Level-0 table #594: 18936 bytes OK
+2026/07/27-22:55:29.130 35ac Delete type=0 #590
+2026/07/27-22:56:29.182 35ac Level-0 table #596: started
+2026/07/27-22:56:29.297 35ac Level-0 table #596: 18934 bytes OK
+2026/07/27-22:56:29.305 35ac Delete type=0 #593
+2026/07/27-22:57:29.217 35ac Level-0 table #598: started
+2026/07/27-22:57:29.426 35ac Level-0 table #598: 18888 bytes OK
+2026/07/27-22:57:29.456 35ac Delete type=0 #595
+2026/07/27-22:58:30.043 35ac Level-0 table #600: started
+2026/07/27-22:58:30.739 35ac Level-0 table #600: 18950 bytes OK
+2026/07/27-22:58:31.716 35ac Delete type=0 #597
+2026/07/27-22:58:31.745 35ac Compacting 4@0 + 1@1 files
+2026/07/27-22:58:31.978 35ac Generated table #601@0: 13 keys, 19750 bytes
+2026/07/27-22:58:31.978 35ac Compacted 4@0 + 1@1 files => 19750 bytes
+2026/07/27-22:58:32.028 35ac compacted to: files[ 0 1 1 0 0 0 0 ]
+2026/07/27-22:58:32.119 35ac Delete type=2 #592
+2026/07/27-22:58:32.131 35ac Delete type=2 #594
+2026/07/27-22:58:32.135 35ac Delete type=2 #596
+2026/07/27-22:58:32.136 35ac Delete type=2 #598
+2026/07/27-22:58:32.136 35ac Delete type=2 #600
+2026/07/27-22:59:30.402 35ac Level-0 table #603: started
+2026/07/27-22:59:31.107 35ac Level-0 table #603: 20303 bytes OK
+2026/07/27-22:59:31.249 35ac Delete type=0 #599
+2026/07/27-23:01:30.670 35ac Level-0 table #605: started
+2026/07/27-23:01:32.626 35ac Level-0 table #605: 28514 bytes OK
+2026/07/27-23:01:33.585 35ac Delete type=0 #602
+2026/07/27-23:02:29.292 35ac Level-0 table #607: started
+2026/07/27-23:02:30.347 35ac Level-0 table #607: 19484 bytes OK
+2026/07/27-23:02:30.508 35ac Delete type=0 #604
+2026/07/27-23:03:29.464 35ac Level-0 table #609: started
+2026/07/27-23:03:29.556 35ac Level-0 table #609: 20236 bytes OK
+2026/07/27-23:03:29.585 35ac Delete type=0 #606
+2026/07/27-23:03:29.588 2100 Compacting 4@0 + 1@1 files
+2026/07/27-23:03:29.970 2100 Generated table #610@0: 13 keys, 21030 bytes
+2026/07/27-23:03:29.976 2100 Compacted 4@0 + 1@1 files => 21030 bytes
+2026/07/27-23:03:29.980 2100 compacted to: files[ 0 1 1 0 0 0 0 ]
+2026/07/27-23:03:29.990 2100 Delete type=2 #601
+2026/07/27-23:03:29.990 2100 Delete type=2 #603
+2026/07/27-23:03:29.991 2100 Delete type=2 #605
+2026/07/27-23:03:29.992 2100 Delete type=2 #607
+2026/07/27-23:03:29.992 2100 Delete type=2 #609
+2026/07/27-23:04:29.113 2100 Level-0 table #612: started
+2026/07/27-23:04:29.187 2100 Level-0 table #612: 20240 bytes OK
+2026/07/27-23:04:29.199 2100 Delete type=0 #608
+2026/07/27-23:06:29.143 35ac Level-0 table #614: started
+2026/07/27-23:06:29.192 35ac Level-0 table #614: 18963 bytes OK
+2026/07/27-23:06:29.224 35ac Delete type=0 #611

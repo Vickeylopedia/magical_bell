@@ -1,0 +1,65 @@
+2026/07/27-22:22:58.434 2be8 Reusing MANIFEST C:\Users\dell\Documents\antigravity\audius\audius_session_profile\Default\Local Storage\leveldb/MANIFEST-000001
+2026/07/27-22:22:58.467 2be8 Recovering log #530
+2026/07/27-22:22:58.470 2be8 Level-0 table #533: started
+2026/07/27-22:22:58.529 2be8 Level-0 table #533: 18847 bytes OK
+2026/07/27-22:22:58.563 2be8 Delete type=0 #530
+2026/07/27-22:25:02.746 4158 Level-0 table #536: started
+2026/07/27-22:25:02.846 4158 Level-0 table #536: 20271 bytes OK
+2026/07/27-22:25:02.896 4158 Delete type=0 #534
+2026/07/27-22:25:02.950 4158 Compacting 4@0 + 1@1 files
+2026/07/27-22:25:03.306 4158 Generated table #537@0: 13 keys, 21010 bytes
+2026/07/27-22:25:03.308 4158 Compacted 4@0 + 1@1 files => 21010 bytes
+2026/07/27-22:25:03.321 4158 compacted to: files[ 0 1 1 0 0 0 0 ]
+2026/07/27-22:25:03.328 4158 Delete type=2 #527
+2026/07/27-22:25:03.328 4158 Delete type=2 #529
+2026/07/27-22:25:03.328 4158 Delete type=2 #531
+2026/07/27-22:25:03.329 4158 Delete type=2 #533
+2026/07/27-22:25:03.329 4158 Delete type=2 #536
+2026/07/27-22:26:03.242 4158 Level-0 table #539: started
+2026/07/27-22:26:03.838 4158 Level-0 table #539: 19587 bytes OK
+2026/07/27-22:26:04.189 4158 Delete type=0 #535
+2026/07/27-22:27:02.655 4158 Level-0 table #541: started
+2026/07/27-22:27:02.692 4158 Level-0 table #541: 19553 bytes OK
+2026/07/27-22:27:02.697 4158 Delete type=0 #538
+2026/07/27-22:28:02.641 4158 Level-0 table #543: started
+2026/07/27-22:28:02.658 4158 Level-0 table #543: 19541 bytes OK
+2026/07/27-22:28:02.664 4158 Delete type=0 #540
+2026/07/27-22:30:02.656 4158 Level-0 table #545: started
+2026/07/27-22:30:02.734 4158 Level-0 table #545: 18958 bytes OK
+2026/07/27-22:30:02.741 4158 Delete type=0 #542
+2026/07/27-22:30:02.742 4158 Compacting 4@0 + 1@1 files
+2026/07/27-22:30:02.778 4158 Generated table #546@0: 13 keys, 19733 bytes
+2026/07/27-22:30:02.778 4158 Compacted 4@0 + 1@1 files => 19733 bytes
+2026/07/27-22:30:02.780 4158 compacted to: files[ 0 1 1 0 0 0 0 ]
+2026/07/27-22:30:02.782 4158 Delete type=2 #537
+2026/07/27-22:30:02.783 4158 Delete type=2 #539
+2026/07/27-22:30:02.784 4158 Delete type=2 #541
+2026/07/27-22:30:02.784 4158 Delete type=2 #543
+2026/07/27-22:30:02.785 4158 Delete type=2 #545
+2026/07/27-22:31:02.649 4158 Level-0 table #548: started
+2026/07/27-22:31:02.674 4158 Level-0 table #548: 18822 bytes OK
+2026/07/27-22:31:02.680 4158 Delete type=0 #544
+2026/07/27-22:32:03.087 4158 Level-0 table #550: started
+2026/07/27-22:32:04.272 4158 Level-0 table #550: 18822 bytes OK
+2026/07/27-22:32:04.517 4158 Delete type=0 #547
+2026/07/27-22:33:03.462 4158 Level-0 table #552: started
+2026/07/27-22:33:05.157 4158 Level-0 table #552: 18821 bytes OK
+2026/07/27-22:33:05.837 4158 Delete type=0 #549
+2026/07/27-22:35:02.709 4158 Level-0 table #554: started
+2026/07/27-22:35:02.769 4158 Level-0 table #554: 37383 bytes OK
+2026/07/27-22:35:02.782 4158 Delete type=0 #551
+2026/07/27-22:35:02.996 4158 Compacting 4@0 + 1@1 files
+2026/07/27-22:35:03.031 4158 Generated table #555@0: 13 keys, 20332 bytes
+2026/07/27-22:35:03.031 4158 Compacted 4@0 + 1@1 files => 20332 bytes
+2026/07/27-22:35:03.065 4158 compacted to: files[ 0 1 1 0 0 0 0 ]
+2026/07/27-22:35:03.102 4158 Delete type=2 #546
+2026/07/27-22:35:03.102 4158 Delete type=2 #548
+2026/07/27-22:35:03.103 4158 Delete type=2 #550
+2026/07/27-22:35:03.103 4158 Delete type=2 #552
+2026/07/27-22:35:03.103 4158 Delete type=2 #554
+2026/07/27-22:36:03.005 2be8 Level-0 table #557: started
+2026/07/27-22:36:03.420 2be8 Level-0 table #557: 18820 bytes OK
+2026/07/27-22:36:03.504 2be8 Delete type=0 #553
+2026/07/27-22:37:02.777 4158 Level-0 table #559: started
+2026/07/27-22:37:02.959 4158 Level-0 table #559: 18894 bytes OK
+2026/07/27-22:37:03.079 4158 Delete type=0 #556
