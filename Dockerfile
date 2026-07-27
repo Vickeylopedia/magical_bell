@@ -18,4 +18,4 @@ RUN npm install
 
 COPY . .
 
-CMD ["node", "bot_2.mjs"]
+CMD ["node", "bot.mjs"]
