@@ -1,0 +1,14 @@
+{
+  "name": "audius-feed-bot",
+  "version": "1.0.0",
+  "description": "Automated Audius feed interaction bot using Puppeteer",
+  "type": "module",
+  "main": "bot.mjs",
+  "scripts": {
+    "start": "node bot.mjs",
+    "dev": "node --watch bot.mjs"
+  },
+  "dependencies": {
+    "puppeteer": "^24.43.1"
+  }
+}
