@@ -407,14 +407,18 @@ async function launchBrowser() {
   log.bot('Launching Chromium browser instance…');
 
   const launchOptions = {
-    headless: true,   // ← visible window so you can log in to Audius
+    headless: true,
     userDataDir: CONFIG.USER_DATA_DIR,
     defaultViewport: CONFIG.VIEWPORT,
     args: [
       '--no-sandbox',
       '--disable-setuid-sandbox',
       '--disable-dev-shm-usage',
+      '--disable-accelerated-2d-canvas',
+      '--no-first-run',
+      '--no-zygote',
       '--disable-gpu',
+      '--js-flags="--max-old-space-size=256"',
       '--disk-cache-size=1',
       '--media-cache-size=1',
       '--disable-application-cache',
@@ -424,7 +428,6 @@ async function launchBrowser() {
       '--disable-background-networking',
       '--disable-sync',
       '--disable-default-apps',
-      '--no-first-run',
     ],
   };
 
@@ -443,6 +446,17 @@ async function launchBrowser() {
 
   await page.setCacheEnabled(false);
   await clearCDPCache(page);
+
+  // ── Block heavy resources (images, stylesheets, fonts, media streams) ───
+  await page.setRequestInterception(true);
+  page.on('request', (req) => {
+    const resourceType = req.resourceType();
+    if (['image', 'stylesheet', 'font', 'media'].includes(resourceType)) {
+      req.abort();
+    } else {
+      req.continue();
+    }
+  });
 
   await page.evaluateOnNewDocument(() => {
     Object.defineProperty(navigator, 'webdriver', { get: () => false });
@@ -1121,6 +1135,14 @@ async function runLoop(page) {
       } catch {
         log.error('Recovery navigation unsuccessful — continuing to next loop cycle.');
       }
+    }
+
+    // Per-cycle memory cleanup: clear CDP cache & run GC if available
+    try {
+      await clearCDPCache(page);
+      if (global.gc) global.gc();
+    } catch (cleanupErr) {
+      log.warn(`Memory cleanup notice: ${cleanupErr.message}`);
     }
 
     // Standby 15 seconds before next cycle
