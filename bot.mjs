@@ -22,6 +22,8 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import http from 'http';
 
+let isStartupNotificationSent = false;
+
 // Tell Render your app is healthy on the assigned PORT
 const PORT = process.env.PORT || 10000;
 http.createServer((req, res) => {
@@ -417,6 +419,7 @@ async function launchBrowser() {
       '--disable-accelerated-2d-canvas',
       '--no-first-run',
       '--no-zygote',
+      '--single-process',
       '--disable-gpu',
       '--js-flags="--max-old-space-size=256"',
       '--disk-cache-size=1',
@@ -1166,8 +1169,11 @@ async function main() {
     // 1. Register Telegram command menu & button keyboard
     await registerTelegramMenu();
 
-    // 2. Send Startup Notification straight to Telegram with reply markup menu keyboard
-    await sendTelegramAlert('🚀 <b>Audius Bot Online</b> — Initializing browser & sessions...', true);
+    // 2. Send Startup Notification straight to Telegram ONCE on boot
+    if (!isStartupNotificationSent) {
+      isStartupNotificationSent = true;
+      await sendTelegramAlert('🚀 <b>Audius Bot Online</b> — Initializing browser & sessions...', true);
+    }
 
     const instance = await launchBrowser();
     browser = instance.browser;
