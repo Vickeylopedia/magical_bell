@@ -407,7 +407,7 @@ async function launchBrowser() {
   log.bot('Launching Chromium browser instance…');
 
   const launchOptions = {
-    headless: 'new',
+    headless: new,   // ← visible window so you can log in to Audius
     userDataDir: CONFIG.USER_DATA_DIR,
     defaultViewport: CONFIG.VIEWPORT,
     args: [
@@ -446,6 +446,39 @@ async function launchBrowser() {
 
   await page.evaluateOnNewDocument(() => {
     Object.defineProperty(navigator, 'webdriver', { get: () => false });
+  });
+
+  // ── Forward browser-side console logs to the Node terminal ──────────
+  // Known noise patterns from Audius internals, telemetry, and CORS errors
+  // are silently dropped so only meaningful application logs reach the terminal.
+  const BROWSER_LOG_NOISE = [
+    'gain2.audius.co',       // Audius analytics endpoint
+    'Amplitude',             // Amplitude telemetry SDK
+    'OPTIMIZELY',            // Optimizely A/B testing SDK
+    'CORS policy',           // Cross-origin request blocks (expected)
+    'Failed to load resource', // Network 4xx/5xx from ad/analytics scripts
+    'ERR_BLOCKED_BY_CLIENT', // Ad blocker / browser blocking telemetry
+    'favicon.ico',           // Favicon fetch noise
+    'Uncaught (in promise)', // Generic unhandled rejections from 3rd-party bundles
+    '__webpack',             // Webpack internal module logs
+    'analyticsendpoint',     // Generic analytics catch-all
+    'sentry.io',             // Sentry error reporting SDK
+    'segment.io',            // Segment analytics SDK
+  ];
+
+  page.on('console', (msg) => {
+    const type = msg.type().toUpperCase();
+    const text = msg.text();
+
+    // Drop any message matching a known noise pattern
+    if (BROWSER_LOG_NOISE.some((pattern) => text.includes(pattern))) return;
+
+    console.log(`[BROWSER ${type}]: ${text}`);
+  });
+
+  // Forward unhandled page errors too
+  page.on('pageerror', (err) => {
+    console.error(`[BROWSER PAGE ERROR]: ${err.message}`);
   });
 
   return { browser, page };
@@ -499,34 +532,37 @@ async function ensureFeedPage(page) {
   }
 }
 
-async function ensureLatestFilter(page) {
-  log.info('Verifying feed filter is set to "Latest"…');
+// ─── Phase 2b: Optimised Feed Reload ─────────────────────────────────────
+
+/**
+ * Hard-reload the Audius feed using page.goto(networkidle2) so React fully
+ * bootstraps on every scan cycle. After navigation:
+ *   1. Micro-scroll to trigger infinite-scroll / React lazy hydration.
+ *   2. Wait 2 s for the SPA to settle.
+ *   3. Safely wait for the first track link — wrapped in try/catch so a
+ *      slow feed never throws an uncaught timeout.
+ */
+async function scanFeedPage(page) {
+  log.info('Hard-reloading feed via page.goto(networkidle2)…');
 
   try {
-    const result = await page.evaluate(() => {
-      const allClickable = Array.from(document.querySelectorAll('button, a, [role="tab"]'));
-      const tab = allClickable.find(el => /^(latest|following)$/i.test(el.textContent?.trim()));
-      if (!tab) return 'not-found';
+    await page.goto(CONFIG.FEED_URL, { waitUntil: 'networkidle2', timeout: 30_000 });
+  } catch (navErr) {
+    // networkidle2 can time-out on slow connections — fall back gracefully
+    log.warn(`networkidle2 timed out (${navErr.message}) — continuing with current DOM.`);
+  }
 
-      const ariaSelected = tab.getAttribute('aria-selected');
-      if (ariaSelected === 'true') return 'already-active';
-      if (/active|selected|current/i.test(tab.className || '')) return 'already-active';
-      if (tab.dataset?.active === 'true') return 'already-active';
+  // Micro-scroll: triggers React's IntersectionObserver / lazy render
+  await page.evaluate(() => window.scrollBy(0, 400));
 
-      tab.click();
-      return 'clicked';
-    });
+  // Wait for SPA components to settle (replaces deprecated waitForTimeout)
+  await new Promise((res) => setTimeout(res, 2000));
 
-    if (result === 'clicked') {
-      await sleep(1500);
-      log.ok('Switched feed filter to "Latest" ✓');
-    } else if (result === 'already-active') {
-      log.ok('Feed filter is "Latest" ✓');
-    } else {
-      log.warn('Could not confirm filter tab — assuming default feed list.');
-    }
-  } catch (err) {
-    log.error(`Filter verification error: ${err.message}`);
+  // Safely wait for a track link — never crashes if the feed is slow
+  try {
+    await page.waitForSelector('a[href]', { visible: true, timeout: CONFIG.SELECTOR_TIMEOUT });
+  } catch {
+    log.warn('waitForSelector(a[href]) timed out — feed may still be loading.');
   }
 }
 
@@ -620,9 +656,27 @@ async function getLatestTracks(page) {
 
         seen.add(href);
 
+        // ── Step 4: Extract Artist Name ───────────────────────────────
+        let artist = user; // Fallback to handle slug
+        if (card) {
+          const artistLinks = Array.from(card.querySelectorAll('a[href]'));
+          for (const a of artistLinks) {
+            const aHref = (a.getAttribute('href') || '').trim();
+            const aSegs = aHref.split('/').filter(Boolean);
+            if (aSegs.length === 1 && aSegs[0].toLowerCase() === user.toLowerCase()) {
+              const text = (a.textContent || '').trim();
+              if (text && !NOISE_PATTERNS.test(text) && text.length < 80) {
+                artist = text;
+                break;
+              }
+            }
+          }
+        }
+
         results.push({
           trackId: href,
           title: rawText.substring(0, 120),
+          artist: artist,
         });
       }
 
@@ -1007,14 +1061,10 @@ async function runLoop(page) {
     cycleCount++;
 
     try {
-      await ensureFeedPage(page);
-
-      // Feed Scanning Phase
-      log.info(`Cycle #${cycleCount} — reloading feed page…`);
+      // Hard-reload feed with micro-scroll + safe selector wait
+      log.info(`Cycle #${cycleCount} — scanning feed…`);
       await sendTelegramAlert('🔄 <b>Scanning feed</b> — checking for new tracks...');
-      await resilientReload(page, `Cycle #${cycleCount} reload`);
-
-      await ensureLatestFilter(page);
+      await scanFeedPage(page);
 
       const tracks = await getLatestTracks(page);
 
@@ -1029,8 +1079,20 @@ async function runLoop(page) {
       const newTracks = tracks.filter(t => !processedTrackIds.has(t.trackId));
 
       if (newTracks.length === 0) {
-        log.idle(`No new tracks in feed. Top track: "${tracks[0].title}"`);
-        await sendTelegramAlert('💤 <b>Standby</b> — No new tracks detected. Checking again in 15s...');
+        const topTrack = tracks[0];
+        const topTrackUrl = `https://audius.co${topTrack.trackId}`;
+
+        log.idle(`No new tracks in feed. Top track: "${topTrack.title}" by ${topTrack.artist}`);
+
+        const noNewTracksAlert =
+          `💤 <b>No New Tracks Detected</b>\n\n` +
+          `No new tracks found during this scan cycle.\n\n` +
+          `<b>Current Top Track:</b>\n` +
+          `🎵 <b>Title:</b> <a href="${topTrackUrl}">${topTrack.title}</a>\n` +
+          `👤 <b>Artist:</b> ${topTrack.artist}\n` +
+          `🔗 <b>URL:</b> ${topTrackUrl}`;
+
+        await sendTrackCard(noNewTracksAlert);
       } else {
         log.bot(`Identified ${newTracks.length} new track(s). Processing chronologically…`);
 
@@ -1091,7 +1153,6 @@ async function main() {
 
     await ensureAuthenticated(page);
     await ensureFeedPage(page);
-    await ensureLatestFilter(page);
 
     await runLoop(page);
 
