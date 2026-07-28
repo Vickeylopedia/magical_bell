@@ -407,7 +407,7 @@ async function launchBrowser() {
   log.bot('Launching Chromium browser instance…');
 
   const launchOptions = {
-    headless: new,   // ← visible window so you can log in to Audius
+    headless: true,   // ← visible window so you can log in to Audius
     userDataDir: CONFIG.USER_DATA_DIR,
     defaultViewport: CONFIG.VIEWPORT,
     args: [
